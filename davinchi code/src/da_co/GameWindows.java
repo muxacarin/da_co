@@ -269,10 +269,6 @@ public class GameWindows extends JFrame {
 		contentPane.add(mycard_1, gbc_mycard_1);
 		
 		mycard_2 = new JButton("W");
-		mycard_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		mycard_2.setForeground(Color.WHITE);
 		GridBagConstraints gbc_mycard_2 = new GridBagConstraints();
 		gbc_mycard_2.fill = GridBagConstraints.BOTH;
