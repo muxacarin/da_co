@@ -330,6 +330,22 @@ public class GameWindows extends JFrame {
 		gbc_exitbutton.gridx = 9;
 		gbc_exitbutton.gridy = 8;
 		contentPane.add(exitbutton, gbc_exitbutton);
+		
+		if (people == 3) threepeoplesetup();
+		else if (people == 2) twopeoplesetup(); // 인원수따라 초기설
+	}
+
+	private void twopeoplesetup() {
+		for (int n = 0; n<7; n++){
+			p1card_list[n].setEnabled(false);
+			p3card_list[n].setEnabled(false);
+		}
+		
+	}
+	private void threepeoplesetup() {
+		for (int n=0;n<7;n++){
+			p2card_list[n].setEnabled(false);
+		}
 	}
 
 	private class ExitAction extends AbstractAction {
