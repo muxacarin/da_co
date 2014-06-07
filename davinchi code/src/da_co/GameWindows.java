@@ -8,10 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+
 import java.awt.Color;
 
 public class GameWindows extends JFrame {
@@ -73,12 +76,13 @@ public class GameWindows extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
 	
-	public GameWindows(){
+	public GameWindows() {
 		this(4);
 	}
-	public GameWindows(int people) {
+	public GameWindows(int people)  {
 		
 		davinchicodehelper = new DavinchiCodeHelper(this, people);
 		
@@ -331,22 +335,8 @@ public class GameWindows extends JFrame {
 		gbc_exitbutton.gridy = 8;
 		contentPane.add(exitbutton, gbc_exitbutton);
 		
-		if (people == 3) threepeoplesetup();
-		else if (people == 2) twopeoplesetup(); // 인원수따라 초기설
 	}
 
-	private void twopeoplesetup() {
-		for (int n = 0; n<7; n++){
-			p1card_list[n].setEnabled(false);
-			p3card_list[n].setEnabled(false);
-		}
-		
-	}
-	private void threepeoplesetup() {
-		for (int n=0;n<7;n++){
-			p2card_list[n].setEnabled(false);
-		}
-	}
 
 	private class ExitAction extends AbstractAction {
 		/**
