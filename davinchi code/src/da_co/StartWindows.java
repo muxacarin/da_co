@@ -63,7 +63,7 @@ public class StartWindows {
 		frame.getContentPane().add(btnGameStart, BorderLayout.CENTER);
 		
 		gamepeople = new JComboBox();
-		gamepeople.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4"}));
+		gamepeople.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4", "5"}));
 		gamepeople.setSelectedIndex(2);
 		frame.getContentPane().add(gamepeople, BorderLayout.WEST);
 	}
@@ -81,7 +81,9 @@ public class StartWindows {
 			putValue(SHORT_DESCRIPTION, "Press this button to start the game.");
 		}
 		public void actionPerformed(ActionEvent e) {
-			gamewindows = new GameWindows();
+
+				gamewindows = new GameWindows();
+
 			gamewindows.setVisible(true);
 			frame.setVisible(false);
 		}
