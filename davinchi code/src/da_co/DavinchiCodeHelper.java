@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class DavinchiCodeHelper {
-	
+		//archi1test
 	private GameWindows gamewindows;	//게임판 : ui제어
 	private DavinchiCodePlayer p1;
 	private DavinchiCodePlayer p2;
