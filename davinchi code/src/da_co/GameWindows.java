@@ -78,7 +78,7 @@ public class GameWindows extends JFrame {
 	 * Create the frame.
 	 * @throws Exception 
 	 */
-	
+	//this comment is only for git test.
 	public GameWindows() {
 		this(4);
 	}
