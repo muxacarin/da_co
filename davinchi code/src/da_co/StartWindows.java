@@ -83,8 +83,9 @@ public class StartWindows {
 			putValue(SHORT_DESCRIPTION, "Press this button to start the game.");
 		}
 		public void actionPerformed(ActionEvent e) {
-
-				gamewindows = new GameWindows();
+			
+			
+			gamewindows = new GameWindows(gamepeople.getSelectedIndex()+2);
 
 			gamewindows.setVisible(true);
 			frame.setVisible(false);
