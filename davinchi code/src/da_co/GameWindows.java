@@ -69,6 +69,8 @@ public class GameWindows extends JFrame {
 	private JButton p3card_6;
 	private JButton p3card_7;	//p3카드버튼
 	private JButton[] p3card_list = new JButton[]{p3card_1,p3card_2,p3card_3,p3card_4,p3card_5,p3card_6,p3card_7};	//p3카드버튼배열
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -89,9 +91,10 @@ public class GameWindows extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		gbl_contentPane.columnWidths = new int[]{40,80,80,80,80,80,80,80,80,80,40};
 		gbl_contentPane.rowHeights = new int[]{60,60,60,60,60,60,60,60,60};
 		contentPane.setLayout(gbl_contentPane);
@@ -207,6 +210,22 @@ public class GameWindows extends JFrame {
 		gbc_p3card_4.gridx = 1;
 		gbc_p3card_4.gridy = 4;
 		contentPane.add(p3card_4, gbc_p3card_4);
+		
+		btnNewButton = new JButton("");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton.insets = zeroinests;
+		gbc_btnNewButton.gridx = 4;
+		gbc_btnNewButton.gridy = 4;
+		contentPane.add(btnNewButton, gbc_btnNewButton);
+		
+		btnNewButton_1 = new JButton("");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton_1.insets = zeroinests;
+		gbc_btnNewButton_1.gridx = 6;
+		gbc_btnNewButton_1.gridy = 4;
+		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
 		
 		p1card_4 = new JButton("");
 		GridBagConstraints gbc_p1card_4 = new GridBagConstraints();
@@ -334,6 +353,8 @@ public class GameWindows extends JFrame {
 		gbc_exitbutton.gridx = 9;
 		gbc_exitbutton.gridy = 8;
 		contentPane.add(exitbutton, gbc_exitbutton);
+		
+		davinchicodehelper.gamestart();
 		
 	}
 
