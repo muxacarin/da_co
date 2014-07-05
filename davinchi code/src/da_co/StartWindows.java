@@ -13,6 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class StartWindows {
 
@@ -20,6 +24,7 @@ public class StartWindows {
 	private GameWindows gamewindows;
 	private final Action gamestart = new GameStart();
 	private JComboBox gamepeople;
+	private JLabel label;
 
 	/**
 	 * Launch the application.
@@ -52,22 +57,49 @@ public class StartWindows {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{400, 400, 0};
+		gridBagLayout.rowHeights = new int[]{289, 289, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("\uB2E4\uBE48\uCE58 \uCF54\uB4DC");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		frame.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		
+		label = new JLabel("");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.fill = GridBagConstraints.BOTH;
+		gbc_label.insets = new Insets(0, 0, 5, 0);
+		gbc_label.gridx = 1;
+		gbc_label.gridy = 0;
+		frame.getContentPane().add(label, gbc_label);
+		
+		gamepeople = new JComboBox();
+		gamepeople.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4"}));
+		gamepeople.setSelectedIndex(2);
+		GridBagConstraints gbc_gamepeople = new GridBagConstraints();
+		gbc_gamepeople.fill = GridBagConstraints.BOTH;
+		gbc_gamepeople.insets = new Insets(0, 0, 0, 5);
+		gbc_gamepeople.gridx = 0;
+		gbc_gamepeople.gridy = 1;
+		frame.getContentPane().add(gamepeople, gbc_gamepeople);
 		
 
 		
 		JButton btnGameStart = new JButton("Game Start");
 		btnGameStart.setAction(gamestart);
-		frame.getContentPane().add(btnGameStart, BorderLayout.CENTER);
-		
-		gamepeople = new JComboBox();
-		gamepeople.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4"}));
-		gamepeople.setSelectedIndex(2);
-		frame.getContentPane().add(gamepeople, BorderLayout.WEST);
+		GridBagConstraints gbc_btnGameStart = new GridBagConstraints();
+		gbc_btnGameStart.fill = GridBagConstraints.BOTH;
+		gbc_btnGameStart.gridx = 1;
+		gbc_btnGameStart.gridy = 1;
+		frame.getContentPane().add(btnGameStart, gbc_btnGameStart);
 	}
 
 	private class GameStart extends AbstractAction {

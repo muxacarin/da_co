@@ -101,7 +101,6 @@ public class GameWindows extends JFrame {
 		gbl_contentPane.columnWidths = new int[]{40,80,80,80,80,80,80,80,80,80,40};
 		gbl_contentPane.rowHeights = new int[]{60,60,60,60,60,60,60,60,60};
 		contentPane.setLayout(gbl_contentPane);
-		
 		p2card_7 = new JButton("");
 		GridBagConstraints gbc_p2card_7 = new GridBagConstraints();
 		gbc_p2card_7.fill = GridBagConstraints.BOTH;
@@ -367,8 +366,9 @@ public class GameWindows extends JFrame {
 		p1card_list= new JButton[]{p1card_1,p1card_2,p1card_3,p1card_4,p1card_5,p1card_6,p1card_7};
 		p2card_list = new JButton[]{p2card_1,p2card_2,p2card_3,p2card_4,p2card_5,p2card_6,p2card_7};
 		p3card_list = new JButton[]{p3card_1,p3card_2,p3card_3,p3card_4,p3card_5,p3card_6,p3card_7};
-		listarray =new JButton[][] {mycard_list, p1card_list, p2card_list, p3card_list};
-		
+		if(davinchicodehelper.getPeople() == 4) listarray =new JButton[][] {mycard_list, p1card_list, p2card_list, p3card_list};
+		else if (davinchicodehelper.getPeople() == 3) listarray =new JButton[][] {mycard_list, p1card_list, p3card_list};
+		else if (davinchicodehelper.getPeople() == 2) listarray =new JButton[][] {mycard_list, p2card_list};
 		
 		
 		davinchicodehelper.gamestart();
