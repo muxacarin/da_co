@@ -65,7 +65,7 @@ public class StartWindows {
 		frame.getContentPane().add(btnGameStart, BorderLayout.CENTER);
 		
 		gamepeople = new JComboBox();
-		gamepeople.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4", "5"}));
+		gamepeople.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4"}));
 		gamepeople.setSelectedIndex(2);
 		frame.getContentPane().add(gamepeople, BorderLayout.WEST);
 	}
