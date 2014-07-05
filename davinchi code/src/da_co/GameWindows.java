@@ -1,22 +1,19 @@
 package da_co;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-
-import java.awt.Color;
-import javax.swing.UIManager;
 
 public class GameWindows extends JFrame {
 
@@ -42,7 +39,7 @@ public class GameWindows extends JFrame {
 	private JButton mycard_5;
 	private JButton mycard_6;
 	private JButton mycard_7;	//자기카드버튼
-	private JButton[] mycard_list = new JButton[]{mycard_1,mycard_2,mycard_3,mycard_4,mycard_5,mycard_6,mycard_7};	//자기카드버튼배열
+	private JButton[] mycard_list/* = {mycard_1,mycard_2,mycard_3,mycard_4,mycard_5,mycard_6,mycard_7}*/;	//자기카드버튼배열
 	
 	private JButton p1card_1;
 	private JButton p1card_2;
@@ -51,7 +48,7 @@ public class GameWindows extends JFrame {
 	private JButton p1card_5;
 	private JButton p1card_6;
 	private JButton p1card_7;	//p1카드버튼
-	private JButton[] p1card_list = new JButton[]{p1card_1,p1card_2,p1card_3,p1card_4,p1card_5,p1card_6,p1card_7};	//p1카드버튼배열
+	private JButton[] p1card_list/* = new JButton[]{p1card_1,p1card_2,p1card_3,p1card_4,p1card_5,p1card_6,p1card_7}*/;	//p1카드버튼배열
 			
 	private JButton p2card_1;
 	private JButton p2card_2;
@@ -60,7 +57,7 @@ public class GameWindows extends JFrame {
 	private JButton p2card_5;
 	private JButton p2card_6;
 	private JButton p2card_7;	//p2카드버튼
-	private JButton[] p2card_list = new JButton[]{p2card_1,p2card_2,p2card_3,p2card_4,p2card_5,p2card_6,p2card_7};	//p2카드버튼배열
+	private JButton[] p2card_list/* = new JButton[]{p2card_1,p2card_2,p2card_3,p2card_4,p2card_5,p2card_6,p2card_7}*/;	//p2카드버튼배열
 	
 	private JButton p3card_1;
 	private JButton p3card_2;
@@ -69,9 +66,14 @@ public class GameWindows extends JFrame {
 	private JButton p3card_5;
 	private JButton p3card_6;
 	private JButton p3card_7;	//p3카드버튼
-	private JButton[] p3card_list = new JButton[]{p3card_1,p3card_2,p3card_3,p3card_4,p3card_5,p3card_6,p3card_7};	//p3카드버튼배열
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JButton[] p3card_list/* = new JButton[]{p3card_1,p3card_2,p3card_3,p3card_4,p3card_5,p3card_6,p3card_7}*/;	//p3카드버튼배열
+	
+	private JButton[][] listarray /*={mycard_list, p1card_list, p2card_list, p3card_list}*/;
+	
+	
+	private JButton getblackcard;
+	private JButton getwhitecard;
+	private JButton pass;
 
 	/**
 	 * Launch the application.
@@ -84,7 +86,6 @@ public class GameWindows extends JFrame {
 	//this comment is only for git test.
 	public GameWindows() {
 		this(4);
-		//davinchicodehelper.gamestart();
 	}
 	public GameWindows(int people)  {
 		
@@ -213,21 +214,21 @@ public class GameWindows extends JFrame {
 		gbc_p3card_4.gridy = 4;
 		contentPane.add(p3card_4, gbc_p3card_4);
 		
-		btnNewButton = new JButton("");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton.insets = zeroinests;
-		gbc_btnNewButton.gridx = 4;
-		gbc_btnNewButton.gridy = 4;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
+		getblackcard = new JButton("");
+		GridBagConstraints gbc_getblackcard = new GridBagConstraints();
+		gbc_getblackcard.fill = GridBagConstraints.BOTH;
+		gbc_getblackcard.insets = zeroinests;
+		gbc_getblackcard.gridx = 4;
+		gbc_getblackcard.gridy = 4;
+		contentPane.add(getblackcard, gbc_getblackcard);
 		
-		btnNewButton_1 = new JButton("");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton_1.insets = zeroinests;
-		gbc_btnNewButton_1.gridx = 6;
-		gbc_btnNewButton_1.gridy = 4;
-		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
+		getwhitecard = new JButton("");
+		GridBagConstraints gbc_getwhitecard= new GridBagConstraints();
+		gbc_getwhitecard.fill = GridBagConstraints.BOTH;
+		gbc_getwhitecard.insets = zeroinests;
+		gbc_getwhitecard.gridx = 6;
+		gbc_getwhitecard.gridy = 4;
+		contentPane.add(getwhitecard, gbc_getwhitecard);
 		
 		p1card_4 = new JButton("");
 		GridBagConstraints gbc_p1card_4 = new GridBagConstraints();
@@ -244,6 +245,14 @@ public class GameWindows extends JFrame {
 		gbc_p3card_5.gridx = 1;
 		gbc_p3card_5.gridy = 5;
 		contentPane.add(p3card_5, gbc_p3card_5);
+		
+		pass = new JButton("");
+		GridBagConstraints gbc_pass = new GridBagConstraints();
+		gbc_pass.fill = GridBagConstraints.BOTH;
+		gbc_pass.insets = zeroinests;
+		gbc_pass.gridx = 5;
+		gbc_pass.gridy = 5;
+		contentPane.add(pass, gbc_pass);
 		
 		p1card_3 = new JButton("");
 		GridBagConstraints gbc_p1card_3 = new GridBagConstraints();
@@ -354,13 +363,48 @@ public class GameWindows extends JFrame {
 		gbc_exitbutton.gridx = 9;
 		gbc_exitbutton.gridy = 8;
 		contentPane.add(exitbutton, gbc_exitbutton);
+		mycard_list =new JButton[] {mycard_1,mycard_2,mycard_3,mycard_4,mycard_5,mycard_6,mycard_7};
+		p1card_list= new JButton[]{p1card_1,p1card_2,p1card_3,p1card_4,p1card_5,p1card_6,p1card_7};
+		p2card_list = new JButton[]{p2card_1,p2card_2,p2card_3,p2card_4,p2card_5,p2card_6,p2card_7};
+		p3card_list = new JButton[]{p3card_1,p3card_2,p3card_3,p3card_4,p3card_5,p3card_6,p3card_7};
+		listarray =new JButton[][] {mycard_list, p1card_list, p2card_list, p3card_list};
+		
+		
 		
 		davinchicodehelper.gamestart();
 		
 	}
 	
 	public void update(){
+		
 		//need implement
+		int j = 0;
+		for(int i = davinchicodehelper.getTurn(); i < davinchicodehelper.getTurn() + davinchicodehelper.getPeople();i++,j++){
+			int k = 0;
+			for(int number = 0; number <12; number++){
+				if (davinchicodehelper.getcardinhand(i, Dacolor.BLACK, number)){
+					this.listarray[j][k].setBackground(Color.BLACK);
+					this.listarray[j][k].setForeground(Color.WHITE);
+					if (j == 0) this.listarray[j][k].setText(Integer.toString(number));
+					this.listarray[j][k].setVisible(true);
+					k++;
+				}
+				if(davinchicodehelper.getcardinhand(i, Dacolor.WHITE, number)){
+					this.listarray[j][k].setBackground(Color.WHITE);
+					this.listarray[j][k].setForeground(Color.BLACK);
+					if (j == 0) this.listarray[j][k].setText(Integer.toString(number));
+					this.listarray[j][k].setVisible(true);
+					k++;
+				}
+			}
+			for(;k<7;k++){
+				this.listarray[j][k].setBackground(Color.GRAY);
+				this.listarray[j][k].setForeground(Color.GRAY);
+				this.listarray[j][k].setText("");
+				this.listarray[j][k].setVisible(false);
+			}
+		}
+		
 	}
 
 

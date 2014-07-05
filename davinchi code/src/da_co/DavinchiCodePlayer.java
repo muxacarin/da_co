@@ -1,7 +1,6 @@
 package da_co;
 
 import java.util.Arrays;
-import da_co.Color;
 
 public class DavinchiCodePlayer {
 	
@@ -13,7 +12,7 @@ public class DavinchiCodePlayer {
 		Arrays.fill(hand_black, false);
 	}
 	
-	public void cardset(Color color, int number){
+	public void cardset(Dacolor color, int number){
 		
 		switch (color){
 		case WHITE: hand_white[number] = true;
@@ -25,6 +24,19 @@ public class DavinchiCodePlayer {
 		
 		}
 		
+	}
+	
+	public boolean cardget(Dacolor color, int number){
+		
+		switch (color){
+		case BLACK:
+			return hand_black[number];
+		case WHITE:
+			return hand_white[number];
+		default:
+			return (Boolean) null;
+		
+		}
 	}
 	
 	

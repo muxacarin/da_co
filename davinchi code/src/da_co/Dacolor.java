@@ -1,6 +1,6 @@
 package da_co;
 
-public enum Color {
+public enum Dacolor {
 	
 	WHITE, BLACK
 
