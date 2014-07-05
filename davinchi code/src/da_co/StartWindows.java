@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class StartWindows {
 
@@ -27,9 +28,10 @@ public class StartWindows {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 					StartWindows window = new StartWindows();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+					} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

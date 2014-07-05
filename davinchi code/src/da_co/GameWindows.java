@@ -16,6 +16,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 import java.awt.Color;
+import javax.swing.UIManager;
 
 public class GameWindows extends JFrame {
 
@@ -83,6 +84,7 @@ public class GameWindows extends JFrame {
 	//this comment is only for git test.
 	public GameWindows() {
 		this(4);
+		//davinchicodehelper.gamestart();
 	}
 	public GameWindows(int people)  {
 		
@@ -283,7 +285,7 @@ public class GameWindows extends JFrame {
 		gbc_p1card_1.gridy = 7;
 		contentPane.add(p1card_1, gbc_p1card_1);
 		
-		mycard_1 = new JButton("B");
+		mycard_1 = new JButton("");
 		GridBagConstraints gbc_mycard_1 = new GridBagConstraints();
 		gbc_mycard_1.fill = GridBagConstraints.BOTH;
 		gbc_mycard_1.insets = zeroinests;
@@ -291,8 +293,7 @@ public class GameWindows extends JFrame {
 		gbc_mycard_1.gridy = 8;
 		contentPane.add(mycard_1, gbc_mycard_1);
 		
-		mycard_2 = new JButton("W");
-		mycard_2.setForeground(Color.WHITE);
+		mycard_2 = new JButton("");
 		GridBagConstraints gbc_mycard_2 = new GridBagConstraints();
 		gbc_mycard_2.fill = GridBagConstraints.BOTH;
 		gbc_mycard_2.insets = zeroinests;
@@ -356,6 +357,10 @@ public class GameWindows extends JFrame {
 		
 		davinchicodehelper.gamestart();
 		
+	}
+	
+	public void update(){
+		//need implement
 	}
 
 
