@@ -16,7 +16,7 @@ public class DavinchiCodeHelper {
 	private Random ran = new Random();
 	private int turn;
 	private Turn turnindex;
-	
+	private boolean canpass;
 	
 	
 	DavinchiCodeHelper(GameWindows gw){
@@ -120,16 +120,19 @@ public class DavinchiCodeHelper {
 	}
 	
 	public boolean getcardinhand(int n, Dacolor color, int number){
-		return pAL.get(n).cardget(color, number);
+		return pAL.get(n%this.people).cardget(color, number);
 	}
 
 	public Turn getTurnindex() {
 		return turnindex;
 	}
 
-	
-	
-	
-	
+	public boolean isCanpass() {
+		return canpass;
+	}
 
+
+	
+	
+	
 }
