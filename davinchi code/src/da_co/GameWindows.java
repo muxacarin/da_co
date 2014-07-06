@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class GameWindows extends JFrame {
@@ -31,9 +33,18 @@ public class GameWindows extends JFrame {
 	private final Action exitaction = new ExitAction();	//종료액션
 	private final Action TakeBlack = new Takeblack();
 	private final Action TakeWhite = new Takewhite();
+	private final Action passturn = new PassTurn();
 	
 	
 	private final Insets zeroinests = new Insets(0,0,0,0);	//여백 0
+	
+	private final MouseAdapter mouse = new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			JButton button = (JButton) arg0.getSource();
+			if(button.isEnabled()) GameWindows.this.assertcard(button);;
+		}
+	};
 	
 	private JButton mycard_1;
 	private JButton mycard_2;
@@ -107,6 +118,7 @@ public class GameWindows extends JFrame {
 	private JButton mycard_14;
 	private JButton exitbutton;
 	private JComboBox numberBox;
+	
 
 
 	/**
@@ -240,6 +252,7 @@ public class GameWindows extends JFrame {
 		contentPane.add(p2card_2, gbc_p2card_2);
 		
 		p2card_1 = new JButton("");
+		//p2card_1.addMouseListener(mouse);
 		GridBagConstraints gbc_p2card_1 = new GridBagConstraints();
 		gbc_p2card_1.fill = GridBagConstraints.BOTH;
 		gbc_p2card_1.insets = zeroinests;
@@ -406,6 +419,7 @@ public class GameWindows extends JFrame {
 		contentPane.add(p3card_8, gbc_p3card_8);
 		
 		passbutton = new JButton("");
+		passbutton.setAction(passturn);
 		GridBagConstraints gbc_passbutton = new GridBagConstraints();
 		gbc_passbutton.gridheight = 2;
 		gbc_passbutton.gridwidth = 2;
@@ -662,6 +676,12 @@ public class GameWindows extends JFrame {
 			}
 		}
 		
+		for (JButton[] list : this.listarray){
+			for(JButton button : list){
+				button.addMouseListener(mouse);
+			}
+		}
+		
 		
 		davinchicodehelper.gamestart();
 		
@@ -669,32 +689,7 @@ public class GameWindows extends JFrame {
 	
 	public void update(){
 		
-		int j = 0;
-		for(int i = davinchicodehelper.getTurn(); i < davinchicodehelper.getTurn() + davinchicodehelper.getPeople();i++,j++){
-			int k = 0;
-			for(int number = 0; number <12; number++){
-				if (davinchicodehelper.getcardinhand(i, Dacolor.BLACK, number)){
-					this.listarray[j][k].setBackground(Color.BLACK);
-					this.listarray[j][k].setForeground(Color.WHITE);
-					if (j == 0) this.listarray[j][k].setText(Integer.toString(number));
-					this.listarray[j][k].setVisible(true);
-					k++;
-				}
-				if(davinchicodehelper.getcardinhand(i, Dacolor.WHITE, number)){
-					this.listarray[j][k].setBackground(Color.WHITE);
-					this.listarray[j][k].setForeground(Color.BLACK);
-					if (j == 0) this.listarray[j][k].setText(Integer.toString(number));
-					this.listarray[j][k].setVisible(true);
-					k++;
-				}
-			}
-			for(;k<listarray[j].length;k++){
-				this.listarray[j][k].setBackground(Color.GRAY);
-				this.listarray[j][k].setForeground(Color.GRAY);
-				this.listarray[j][k].setText("");
-				this.listarray[j][k].setVisible(false);
-			}
-		}
+		
 		
 		if (davinchicodehelper.getTurnindex() == Turn.CARDGET){
 			if (davinchicodehelper.getRemainder_black() != 0) this.getblackcard.setEnabled(true);
@@ -719,7 +714,67 @@ public class GameWindows extends JFrame {
 			this.getblackcard.setEnabled(false);
 			this.getwhitecard.setEnabled(false);
 		}
+		updatecard();
+	}
+	private void updatecard() {
 		
+		for(JButton[] list : this.listarray){
+			for (JButton button : list){
+				button.setText("");
+			}
+		}
+		int j = 0;
+		for(int i = davinchicodehelper.getTurn(); i < davinchicodehelper.getTurn() + davinchicodehelper.getPeople();i++,j++){
+			int k = 0;
+			for(int number = 0; number <12; number++){
+				if (davinchicodehelper.getcardinhand(i, Dacolor.BLACK, number)){
+					this.listarray[j][k].setBackground(Color.BLACK);
+					this.listarray[j][k].setForeground(Color.WHITE);
+					if (j == 0 || davinchicodehelper.getopencardinhand(i, Dacolor.BLACK, number)) {
+						this.listarray[j][k].setText(Integer.toString(number));
+						this.listarray[j][k].setEnabled(false);
+					}
+					if (j == 0 && davinchicodehelper.getopencardinhand(i, Dacolor.BLACK, number)) {
+						this.listarray[j][k].setForeground(Color.red);
+						this.listarray[j][k].setEnabled(true);
+					}
+					this.listarray[j][k].setVisible(true);
+					k++;
+				}
+				if(davinchicodehelper.getcardinhand(i, Dacolor.WHITE, number)){
+					this.listarray[j][k].setBackground(Color.WHITE);
+					this.listarray[j][k].setForeground(Color.BLACK);
+					if (j == 0 || davinchicodehelper.getopencardinhand(i, Dacolor.WHITE, number)) {
+						this.listarray[j][k].setText(Integer.toString(number));
+						this.listarray[j][k].setEnabled(false);;
+					}
+					if (j == 0 && davinchicodehelper.getopencardinhand(i, Dacolor.WHITE, number)) {
+						this.listarray[j][k].setForeground(Color.red);
+						this.listarray[j][k].setEnabled(true);
+					}
+					this.listarray[j][k].setVisible(true);
+					k++;
+				}
+			}
+			for(;k<listarray[j].length;k++){
+				this.listarray[j][k].setBackground(Color.GRAY);
+				this.listarray[j][k].setForeground(Color.GRAY);
+				this.listarray[j][k].setText("");
+				this.listarray[j][k].setVisible(false);
+			}
+		}
+	}
+	
+	private void assertcard(JButton source){
+		for(int i = 1; i<listarray.length;i++){
+			for(int j = 0; j<listarray[i].length;j++){
+				if(listarray[i][j] == source) {
+					Dacolor color = (source.getBackground().equals(Color.BLACK)) ? Dacolor.BLACK : Dacolor.WHITE;
+					davinchicodehelper.assertcard(i, j, color, this.numberBox.getSelectedIndex());
+					break;
+				};
+			}
+		}
 	}
 
 
@@ -761,6 +816,15 @@ public class GameWindows extends JFrame {
 		}
 		public void actionPerformed(ActionEvent e) {
 			davinchicodehelper.takecard(davinchicodehelper.getTurn(), Dacolor.WHITE);
+		}
+	}
+	private class PassTurn extends AbstractAction {
+		public PassTurn() {
+			putValue(NAME, "Pass");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			davinchicodehelper.passturn();
 		}
 	}
 }
