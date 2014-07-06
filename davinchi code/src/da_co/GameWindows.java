@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 
 public class GameWindows extends JFrame {
@@ -25,7 +28,9 @@ public class GameWindows extends JFrame {
 	private JPanel contentPane;	//판때기
 	
 	
-	private final Action exitaction = new ExitAction();	//종료액
+	private final Action exitaction = new ExitAction();	//종료액션
+	private final Action TakeBlack = new Takeblack();
+	private final Action TakeWhite = new Takewhite();
 	
 	
 	private final Insets zeroinests = new Insets(0,0,0,0);	//여백 0
@@ -101,6 +106,8 @@ public class GameWindows extends JFrame {
 	private JButton mycard_13;
 	private JButton mycard_14;
 	private JButton exitbutton;
+	private JComboBox numberBox;
+
 
 	/**
 	 * Launch the application.
@@ -124,6 +131,7 @@ public class GameWindows extends JFrame {
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		gbl_contentPane.columnWidths = new int[]{40,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,40};
 		gbl_contentPane.rowHeights = new int[]{30,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,30};
 		contentPane.setLayout(gbl_contentPane);
@@ -279,6 +287,18 @@ public class GameWindows extends JFrame {
 		gbc_p3card_3.gridy = 4;
 		contentPane.add(p3card_3, gbc_p3card_3);
 		
+		numberBox = new JComboBox();
+		numberBox.setFont(new Font("Dialog", Font.BOLD, 20));
+		numberBox.setModel(new DefaultComboBoxModel(new String[] {"    0", "    1", "    2", "    3", "    4", "    5", "    6", "    7", "    8", "    9", "   10", "   11"}));
+		GridBagConstraints gbc_numberBox = new GridBagConstraints();
+		gbc_numberBox.gridheight = 2;
+		gbc_numberBox.gridwidth = 2;
+		gbc_numberBox.insets = zeroinests;
+		gbc_numberBox.fill = GridBagConstraints.BOTH;
+		gbc_numberBox.gridx = 8;
+		gbc_numberBox.gridy = 4;
+		contentPane.add(numberBox, gbc_numberBox);
+		
 		p1card_12 = new JButton("");
 		GridBagConstraints gbc_p1card_12 = new GridBagConstraints();
 		gbc_p1card_12.fill = GridBagConstraints.BOTH;
@@ -328,6 +348,9 @@ public class GameWindows extends JFrame {
 		contentPane.add(p3card_6, gbc_p3card_6);
 		
 		getblackcard = new JButton("");
+		getblackcard.setAction(TakeBlack);
+		getblackcard.setBackground(Color.BLACK);
+		getblackcard.setForeground(Color.WHITE);
 		GridBagConstraints gbc_getblackcard = new GridBagConstraints();
 		gbc_getblackcard.gridheight = 2;
 		gbc_getblackcard.gridwidth = 2;
@@ -338,6 +361,9 @@ public class GameWindows extends JFrame {
 		contentPane.add(getblackcard, gbc_getblackcard);
 		
 		getwhitecard = new JButton("");
+		getwhitecard.setAction(TakeWhite);
+		getwhitecard.setBackground(Color.WHITE);
+		getwhitecard.setForeground(Color.BLACK);
 		GridBagConstraints gbc_getwhitecard= new GridBagConstraints();
 		gbc_getwhitecard.gridheight = 2;
 		gbc_getwhitecard.gridwidth = 2;
@@ -671,6 +697,8 @@ public class GameWindows extends JFrame {
 		}
 		
 		if (davinchicodehelper.getTurnindex() == Turn.CARDGET){
+			if (davinchicodehelper.getRemainder_black() != 0) this.getblackcard.setEnabled(true);
+			if (davinchicodehelper.getRemainder_white() != 0) this.getwhitecard.setEnabled(true);
 			for(JButton[] list : this.listarray){
 				for(JButton button : list){
 					button.setEnabled(false);
@@ -682,6 +710,14 @@ public class GameWindows extends JFrame {
 			else {
 				this.passbutton.setEnabled(true);
 			}
+		} else if (davinchicodehelper.getTurnindex() == Turn.SELECT){
+			for(JButton[] list : this.listarray){
+				for(JButton button : list){
+					button.setEnabled(true);
+				}
+			}
+			this.getblackcard.setEnabled(false);
+			this.getwhitecard.setEnabled(false);
 		}
 		
 	}
@@ -699,6 +735,32 @@ public class GameWindows extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 			System.exit(0);
+		}
+	}
+	private class Takeblack extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 4986226191171118579L;
+		public Takeblack() {
+			putValue(NAME, "Black Card");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			davinchicodehelper.takecard(davinchicodehelper.getTurn(), Dacolor.BLACK);
+		}
+	}
+	private class Takewhite extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -828002273645918021L;
+		public Takewhite() {
+			putValue(NAME, "White Card");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			davinchicodehelper.takecard(davinchicodehelper.getTurn(), Dacolor.WHITE);
 		}
 	}
 }
