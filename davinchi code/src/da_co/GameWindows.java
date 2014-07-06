@@ -71,7 +71,7 @@ public class GameWindows extends JFrame {
 	
 	private JButton getblackcard;
 	private JButton getwhitecard;
-	private JButton pass;
+	private JButton passbutton;
 	private JButton p2card_8;
 	private JButton p2card_9;
 	private JButton p2card_10;
@@ -379,15 +379,15 @@ public class GameWindows extends JFrame {
 		gbc_p3card_8.gridy = 9;
 		contentPane.add(p3card_8, gbc_p3card_8);
 		
-		pass = new JButton("");
-		GridBagConstraints gbc_pass = new GridBagConstraints();
-		gbc_pass.gridheight = 2;
-		gbc_pass.gridwidth = 2;
-		gbc_pass.fill = GridBagConstraints.BOTH;
-		gbc_pass.insets = zeroinests;
-		gbc_pass.gridx = 8;
-		gbc_pass.gridy = 9;
-		contentPane.add(pass, gbc_pass);
+		passbutton = new JButton("");
+		GridBagConstraints gbc_passbutton = new GridBagConstraints();
+		gbc_passbutton.gridheight = 2;
+		gbc_passbutton.gridwidth = 2;
+		gbc_passbutton.fill = GridBagConstraints.BOTH;
+		gbc_passbutton.insets = zeroinests;
+		gbc_passbutton.gridx = 8;
+		gbc_passbutton.gridy = 9;
+		contentPane.add(passbutton, gbc_passbutton);
 		
 		p1card_7 = new JButton("");
 		GridBagConstraints gbc_p1card_7 = new GridBagConstraints();
@@ -643,7 +643,6 @@ public class GameWindows extends JFrame {
 	
 	public void update(){
 		
-		//need implement
 		int j = 0;
 		for(int i = davinchicodehelper.getTurn(); i < davinchicodehelper.getTurn() + davinchicodehelper.getPeople();i++,j++){
 			int k = 0;
@@ -668,6 +667,20 @@ public class GameWindows extends JFrame {
 				this.listarray[j][k].setForeground(Color.GRAY);
 				this.listarray[j][k].setText("");
 				this.listarray[j][k].setVisible(false);
+			}
+		}
+		
+		if (davinchicodehelper.getTurnindex() == Turn.CARDGET){
+			for(JButton[] list : this.listarray){
+				for(JButton button : list){
+					button.setEnabled(false);
+				}
+			}
+			if(!davinchicodehelper.isCanpass()){
+				this.passbutton.setEnabled(false);
+			}
+			else {
+				this.passbutton.setEnabled(true);
 			}
 		}
 		
