@@ -53,6 +53,10 @@ public class DavinchiCodeHelper {
 	public boolean getcardinhand(int n, Dacolor color, int number){
 		return pAL.get(n%this.people).cardget(color, number);
 	}
+	
+	public boolean getopencardinhand(int n, Dacolor color, int number){
+		return pAL.get(n%this.people).opencardget(color, number);
+	}
 
 	public Turn getTurnindex() {
 		return turnindex;
@@ -133,15 +137,36 @@ public class DavinchiCodeHelper {
 	
 	public void takecard(int peopleindex, Dacolor color){
 		
-		while(!this.addcard(peopleindex, color));
+		while(!this.addcard(peopleindex%this.people, color));
 		this.canpass = true;
 		this.turnindex = Turn.SELECT;
 		this.gamewindows.update();
 		
 	}
 	
+	public void assertcard(int player, int cardpos, Dacolor color, int number){
+		int playerindex = (player + this.turn)%this.people;
+		this.turnindex = Turn.CARDGET;
+		if(!pAL.get(playerindex).cardposition(cardpos, color, number)) {
+			nextturn();
+		}
+		this.gamewindows.update();
+		
+		
+		
+		
+		
+	}
+
+	private void nextturn() {
+		this.turn++;
+		this.canpass = false;
+	}
 	
-	
+	public void passturn(){
+		this.nextturn();
+		gamewindows.update();
+	}
 	
 
 
