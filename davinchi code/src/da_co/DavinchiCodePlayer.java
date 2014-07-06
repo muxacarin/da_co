@@ -26,6 +26,8 @@ public class DavinchiCodePlayer {
 		
 	}
 	
+
+	@SuppressWarnings("null")
 	public boolean cardget(Dacolor color, int number){
 		
 		switch (color){
@@ -33,10 +35,10 @@ public class DavinchiCodePlayer {
 			return hand_black[number];
 		case WHITE:
 			return hand_white[number];
-		default:
-			return (Boolean) null;
+		
 		
 		}
+		return (Boolean) null;
 	}
 	
 	

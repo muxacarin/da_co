@@ -1,7 +1,9 @@
 package da_co;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -13,10 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 public class StartWindows {
 
@@ -71,6 +69,7 @@ public class StartWindows {
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
+		gbc_lblNewLabel.gridwidth = 2;
 		frame.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 		
 		label = new JLabel("");

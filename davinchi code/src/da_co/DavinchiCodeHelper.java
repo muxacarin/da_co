@@ -15,6 +15,7 @@ public class DavinchiCodeHelper {
 	private boolean deck_black[] = new boolean[12];
 	private Random ran = new Random();
 	private int turn;
+	private Turn turnindex;
 	
 	
 	
@@ -113,12 +114,19 @@ public class DavinchiCodeHelper {
 			
 		}
 		
+		this.turnindex = Turn.CARDGET;
+		
 		gamewindows.update();
 	}
 	
 	public boolean getcardinhand(int n, Dacolor color, int number){
 		return pAL.get(n).cardget(color, number);
 	}
+
+	public Turn getTurnindex() {
+		return turnindex;
+	}
+
 	
 	
 	
