@@ -5,8 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -617,13 +615,26 @@ public class GameWindows extends JFrame {
 		gbc_exitbutton.gridx = 16;
 		gbc_exitbutton.gridy = 16;
 		contentPane.add(exitbutton, gbc_exitbutton);
-		mycard_list =new JButton[] {mycard_1,mycard_2,mycard_3,mycard_4,mycard_5,mycard_6,mycard_7,mycard_8,mycard_9,mycard_10,mycard_11,mycard_12,mycard_13,mycard_14};
-		p1card_list= new JButton[]{p1card_1,p1card_2,p1card_3,p1card_4,p1card_5,p1card_6,p1card_7,p1card_8,p1card_9,p1card_10,p1card_11,p1card_12,p1card_13,p1card_14};
-		p2card_list = new JButton[]{p2card_1,p2card_2,p2card_3,p2card_4,p2card_5,p2card_6,p2card_7,p2card_8,p2card_9,p2card_10,p2card_11,p2card_12,p2card_13,p2card_14,};
+		mycard_list = new JButton[]{mycard_1,mycard_2,mycard_3,mycard_4,mycard_5,mycard_6,mycard_7,mycard_8,mycard_9,mycard_10,mycard_11,mycard_12,mycard_13,mycard_14};
+		p1card_list = new JButton[]{p1card_1,p1card_2,p1card_3,p1card_4,p1card_5,p1card_6,p1card_7,p1card_8,p1card_9,p1card_10,p1card_11,p1card_12,p1card_13,p1card_14};
+		p2card_list = new JButton[]{p2card_1,p2card_2,p2card_3,p2card_4,p2card_5,p2card_6,p2card_7,p2card_8,p2card_9,p2card_10,p2card_11,p2card_12,p2card_13,p2card_14};
 		p3card_list = new JButton[]{p3card_1,p3card_2,p3card_3,p3card_4,p3card_5,p3card_6,p3card_7,p3card_8,p3card_9,p3card_10,p3card_11,p3card_12,p3card_13,p3card_14};
 		if(davinchicodehelper.getPeople() == 4) listarray =new JButton[][] {mycard_list, p1card_list, p2card_list, p3card_list};
-		else if (davinchicodehelper.getPeople() == 3) listarray =new JButton[][] {mycard_list, p1card_list, p3card_list};
-		else if (davinchicodehelper.getPeople() == 2) listarray =new JButton[][] {mycard_list, p2card_list};
+		else if (davinchicodehelper.getPeople() == 3) {
+			listarray =new JButton[][] {mycard_list, p1card_list, p3card_list};
+			for (JButton button : p2card_list){
+				button.setVisible(false);
+			}
+		}
+		else if (davinchicodehelper.getPeople() == 2) {
+			listarray =new JButton[][] {mycard_list, p2card_list};
+			for (JButton button : p1card_list){
+				button.setVisible(false);
+			}
+			for (JButton button : p3card_list){
+				button.setVisible(false);
+			}
+		}
 		
 		
 		davinchicodehelper.gamestart();
