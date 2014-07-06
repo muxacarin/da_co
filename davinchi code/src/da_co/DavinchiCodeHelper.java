@@ -12,7 +12,9 @@ public class DavinchiCodeHelper {
 	private ArrayList<DavinchiCodePlayer> pAL = new ArrayList<DavinchiCodePlayer>();
 	private int people;
 	private boolean deck_white[] = new boolean[12];
+	private int remainder_white;
 	private boolean deck_black[] = new boolean[12];
+	private int remainder_black;
 	private Random ran = new Random();
 	private int turn;
 	private Turn turnindex;
@@ -35,6 +37,8 @@ public class DavinchiCodeHelper {
 		}
 		this.pAL.trimToSize();
 		this.turn = 0;
+		this.setRemainder_black(12);
+		this.setRemainder_white(12);
 		
 	}
 	
@@ -44,80 +48,7 @@ public class DavinchiCodeHelper {
 	
 	public int getPeople(){
 		return this.people;
-	}
-
-
-	public void gamestart(){
-		if (this.people == 4){
-			
-			for (int i = 0; i < 4; i++){
-				for (int j = 1; j <= 3; j++){
-					lable1:
-					while(true){
-						
-						Dacolor col = (ran.nextBoolean()) ? Dacolor.WHITE : Dacolor.BLACK;
-						int cardnumber = ran.nextInt(12);
-						
-						switch (col){
-						case WHITE :
-							if (this.deck_white[cardnumber]){
-								this.pAL.get(i).cardset(Dacolor.WHITE, cardnumber);
-								this.deck_white[cardnumber] = false;
-								break lable1;
-							}
-							break;
-						case BLACK:
-							if (this.deck_black[cardnumber]){
-								this.pAL.get(i).cardset(Dacolor.BLACK, cardnumber);
-								this.deck_black[cardnumber] = false;
-								break lable1;
-							}
-							break;
-						default:
-							break;
-						}
-					}
-				}
-			}
-			
-		} else {
-			for (int i = 0; i<people; i++){
-				for (int j = 1; j <= 4; j++){
-					lable1:
-					while(true){
-						
-						Dacolor col = (ran.nextBoolean()) ? Dacolor.WHITE : Dacolor.BLACK;
-						int cardnumber = ran.nextInt(12);
-						
-						switch (col){
-						case WHITE :
-							if (this.deck_white[cardnumber]){
-								this.pAL.get(i).cardset(Dacolor.WHITE, cardnumber);
-								this.deck_white[cardnumber] = false;
-								break lable1;
-							}
-							break;
-						case BLACK:
-							if (this.deck_black[cardnumber]){
-								this.pAL.get(i).cardset(Dacolor.BLACK, cardnumber);
-								this.deck_black[cardnumber] = false;
-								break lable1;
-							}
-							break;
-						default:
-							break;
-						}
-					}
-				}
-				
-			}
-			
-		}
-		
-		this.turnindex = Turn.CARDGET;
-		
-		gamewindows.update();
-	}
+	} 
 	
 	public boolean getcardinhand(int n, Dacolor color, int number){
 		return pAL.get(n%this.people).cardget(color, number);
@@ -130,6 +61,88 @@ public class DavinchiCodeHelper {
 	public boolean isCanpass() {
 		return canpass;
 	}
+	
+	public int getRemainder_white() {
+		return remainder_white;
+	}
+
+	private void setRemainder_white(int remainder_white) {
+		this.remainder_white = remainder_white;
+	}
+
+	public int getRemainder_black() {
+		return remainder_black;
+	}
+
+	private void setRemainder_black(int remainder_black) {
+		this.remainder_black = remainder_black;
+	}
+
+	private boolean addcard (int playerindex, Dacolor color){
+		
+		int cardnumber = ran.nextInt(12);
+		
+		switch (color) {
+		case BLACK:
+			if (this.deck_black[cardnumber]){
+				this.pAL.get(playerindex).cardset(Dacolor.BLACK, cardnumber);
+				this.deck_black[cardnumber] = false;
+				this.setRemainder_black(this.getRemainder_black() - 1);
+				return true;
+			}
+			break;
+		case WHITE:
+			if (this.deck_white[cardnumber]){
+				this.pAL.get(playerindex).cardset(Dacolor.WHITE, cardnumber);
+				this.deck_white[cardnumber] = false;
+				this.setRemainder_white(this.getRemainder_white() - 1);
+				return true;
+			}
+			break;
+		default:
+			break;
+		
+		}
+		return false;
+	}
+
+
+	public void gamestart(){
+		if (this.people == 4){
+			
+			for (int i = 0; i < 4; i++){
+				for (int j = 1; j<=3;){
+					if(this.addcard(i, (this.ran.nextBoolean()) ? Dacolor.BLACK : Dacolor.WHITE)) j++;
+				}
+			}
+			
+		} else {
+			for (int i = 0; i<people; i++){
+				for (int j = 1; j <= 4;){
+					if(this.addcard(i, (this.ran.nextBoolean()) ? Dacolor.BLACK : Dacolor.WHITE)) j++;
+				}
+				
+			}
+			
+		}
+		
+		this.turnindex = Turn.CARDGET;
+		
+		gamewindows.update();
+	}
+	
+	public void takecard(int peopleindex, Dacolor color){
+		
+		while(!this.addcard(peopleindex, color));
+		this.canpass = true;
+		this.turnindex = Turn.SELECT;
+		this.gamewindows.update();
+		
+	}
+	
+	
+	
+	
 
 
 	
