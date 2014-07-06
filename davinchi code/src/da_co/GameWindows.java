@@ -819,6 +819,10 @@ public class GameWindows extends JFrame {
 		}
 	}
 	private class PassTurn extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -3402109466539778898L;
 		public PassTurn() {
 			putValue(NAME, "Pass");
 			putValue(SHORT_DESCRIPTION, "Some short description");
