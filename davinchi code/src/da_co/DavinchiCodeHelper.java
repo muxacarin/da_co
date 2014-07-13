@@ -21,9 +21,6 @@ public class DavinchiCodeHelper {
 	private boolean canpass;
 	
 	
-	DavinchiCodeHelper(GameWindows gw){
-		this(gw,4);
-	}
 	
 	DavinchiCodeHelper(GameWindows gw, int n){
 		
@@ -138,7 +135,6 @@ public class DavinchiCodeHelper {
 	public void takecard(int peopleindex, Dacolor color){
 		
 		while(!this.addcard(peopleindex%this.people, color));
-		this.canpass = true;
 		this.turnindex = Turn.SELECT;
 		this.gamewindows.update();
 		
@@ -147,6 +143,7 @@ public class DavinchiCodeHelper {
 	public void assertcard(int player, int cardpos, Dacolor color, int number){
 		int playerindex = (player + this.turn)%this.people;
 		this.turnindex = Turn.CARDGET;
+		this.canpass = true;
 		if(!pAL.get(playerindex).cardposition(cardpos, color, number)) {
 			nextturn();
 		}

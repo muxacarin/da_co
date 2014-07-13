@@ -127,12 +127,7 @@ public class GameWindows extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws Exception 
-	 */
-	//this comment is only for git test.
-	public GameWindows() {
-		this(4);
-	}
+	 **/
 	public GameWindows(int people)  {
 		
 		davinchicodehelper = new DavinchiCodeHelper(this, people);
@@ -699,12 +694,7 @@ public class GameWindows extends JFrame {
 					button.setEnabled(false);
 				}
 			}
-			if(!davinchicodehelper.isCanpass()){
-				this.passbutton.setEnabled(false);
-			}
-			else {
-				this.passbutton.setEnabled(true);
-			}
+			this.passbutton.setEnabled(davinchicodehelper.isCanpass());
 		} else if (davinchicodehelper.getTurnindex() == Turn.SELECT){
 			for(JButton[] list : this.listarray){
 				for(JButton button : list){
@@ -713,6 +703,7 @@ public class GameWindows extends JFrame {
 			}
 			this.getblackcard.setEnabled(false);
 			this.getwhitecard.setEnabled(false);
+			this.passbutton.setEnabled(false);
 		}
 		updatecard();
 	}
