@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 
+/**
+ * @author marine and MDV
+ *
+ */
 public class DavinchiCodeHelper {
 	
 	private GameWindows gamewindows;	//게임판 : ui제어
-	private DavinchiCodePlayer[] pa = new DavinchiCodePlayer[4];
+//	private DavinchiCodePlayer[] pa = new DavinchiCodePlayer[4];
 	private ArrayList<DavinchiCodePlayer> pAL = new ArrayList<DavinchiCodePlayer>();
 	private int people;
 	private boolean deck_white[] = new boolean[12];
@@ -22,15 +27,14 @@ public class DavinchiCodeHelper {
 	
 	
 	
-	DavinchiCodeHelper(GameWindows gw, int n){
+	DavinchiCodeHelper(GameWindows gw, int gamer){
 		
 		this.gamewindows = gw;
-		this.people = n;
+		this.people = gamer;
 		Arrays.fill(deck_white,true);
 		Arrays.fill(deck_black,true);
 		for(int i=0;i<people;i++){
-			this.pa[i] = new DavinchiCodePlayer();
-			this.pAL.add(this.pa[i]);
+			this.pAL.add(new DavinchiCodePlayer());
 		}
 		this.pAL.trimToSize();
 		this.turn = 0;
@@ -130,6 +134,8 @@ public class DavinchiCodeHelper {
 		this.turnindex = Turn.CARDGET;
 		
 		gamewindows.update();
+		JOptionPane.showMessageDialog(null, "게임을 시작합니다.");
+		//JOptionPane.showMessageDialog(null, "플레이어0의 턴입니다.");
 	}
 	
 	public void takecard(int peopleindex, Dacolor color){
@@ -144,9 +150,17 @@ public class DavinchiCodeHelper {
 		int playerindex = (player + this.turn)%this.people;
 		this.turnindex = Turn.CARDGET;
 		this.canpass = true;
-		if(!pAL.get(playerindex).cardposition(cardpos, color, number)) {
+		if(!pAL.get(playerindex).cardposition(cardpos, color, number)){
+			JOptionPane.showMessageDialog(null, "틀렸습니다. 턴이 넘어갑니다.");
+			JOptionPane.showMessageDialog(null, "마지막으로 뽑은 카드가 공개됩니다.");
+			pAL.get(this.turn%this.people).lastopen();
 			nextturn();
-		}
+		} else {
+			JOptionPane.showMessageDialog(null, "맞추었습니다. 턴을 넘기거나 카드를 뽑을 수 있습니다.");
+			pAL.get(playerindex).setlive();
+			this.assertEnd();
+			}
+		
 		this.gamewindows.update();
 		
 		
@@ -156,13 +170,28 @@ public class DavinchiCodeHelper {
 	}
 
 	private void nextturn() {
-		this.turn++;
+		do{
+			this.turn++;
+		} while(!pAL.get(this.turn%this.people).Islive());
+		
 		this.canpass = false;
+		
+		JOptionPane.showMessageDialog(null, "플레이어"+ (this.turn % this.people + 1)+ "의 턴입니다.");
 	}
 	
 	public void passturn(){
 		this.nextturn();
 		gamewindows.update();
+	}
+	
+	public void assertEnd(){
+		int liver = 0;
+		for(DavinchiCodePlayer DCP : this.pAL){
+			if (DCP.Islive()) liver++;
+		}
+		if (liver == 1) {
+			JOptionPane.showMessageDialog(null, "플레이어"+ (this.turn % this.people + 1) +"께서 승리하셨습니다.");
+		}
 	}
 	
 
