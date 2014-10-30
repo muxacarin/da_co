@@ -17,6 +17,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import java.awt.Font;
 
+/**
+ * @author marine and MDV
+ *
+ */
 public class StartWindows {
 
 	private JFrame frame;

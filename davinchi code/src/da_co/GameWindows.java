@@ -5,19 +5,25 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
+/**
+ * @author marine and MDV
+ *
+ */
 public class GameWindows extends JFrame {
 
 	/**
@@ -683,9 +689,6 @@ public class GameWindows extends JFrame {
 	}
 	
 	public void update(){
-		
-		
-		
 		if (davinchicodehelper.getTurnindex() == Turn.CARDGET){
 			if (davinchicodehelper.getRemainder_black() != 0) this.getblackcard.setEnabled(true);
 			if (davinchicodehelper.getRemainder_white() != 0) this.getwhitecard.setEnabled(true);
@@ -819,6 +822,7 @@ public class GameWindows extends JFrame {
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null, "턴을 넘깁니다.");
 			davinchicodehelper.passturn();
 		}
 	}
