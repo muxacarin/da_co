@@ -672,15 +672,15 @@ public class GameWindows extends JFrame implements GameHandler {
 		//카드의 배열 정의 끝
 		
 		//카드의 배열의 배열 정의 시작
-		if(davinchicodehelper.getPeople() == 4) listarray =new JButton[][] {mycard_list, p1card_list, p2card_list, p3card_list};
+		if(davinchicodehelper.getNumberOfGamer() == 4) listarray =new JButton[][] {mycard_list, p1card_list, p2card_list, p3card_list};
 		
-		else if (davinchicodehelper.getPeople() == 3) {
+		else if (davinchicodehelper.getNumberOfGamer() == 3) {
 			listarray =new JButton[][] {mycard_list, p1card_list, p3card_list};
 			for (JButton button : p2card_list){//안쓰는 버튼 비활성화
 				button.setVisible(false);
 			}
 		}
-		else if (davinchicodehelper.getPeople() == 2) {
+		else if (davinchicodehelper.getNumberOfGamer() == 2) {
 			listarray =new JButton[][] {mycard_list, p2card_list};
 			for (JButton button : p1card_list){//안쓰는 버튼 비활성화
 				button.setVisible(false);
@@ -731,7 +731,7 @@ public class GameWindows extends JFrame implements GameHandler {
 				button.setText("");
 			}
 		}
-		for(int i = davinchicodehelper.getTurn(), j = 0; i < davinchicodehelper.getTurn() + davinchicodehelper.getPeople();i++,j++){
+		for(int i = davinchicodehelper.getTurn(), j = 0; i < davinchicodehelper.getTurn() + davinchicodehelper.getNumberOfGamer();i++,j++){
 			//외부 포문 시작 : 플레이어에 대해서
 			//i : 플레이어 인덱스 넘겨주기
 			//j : 배열 위치 선택용
@@ -843,5 +843,18 @@ public class GameWindows extends JFrame implements GameHandler {
 			JOptionPane.showMessageDialog(null, "턴을 넘깁니다.");
 			davinchicodehelper.passturn();
 		}
+	}
+	@Override
+	public void dead(int playerindex) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "플레이어" + playerindex+1 +"이 탈락했습니다.");
+		
+	}
+
+	@Override
+	public void gameEnd(int winnerindex) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "플레이어" + winnerindex+1 +"이 승리했습니다.");
+		
 	}
 }
