@@ -64,7 +64,8 @@ public class DavinchiCodeHelper {
 		this.turnindex = Turn.CARDGET;//턴의 단계 : 카드 가져오기
 		
 		gamehandler.update();//판 업데이트
-		JOptionPane.showMessageDialog(null, "게임을 시작합니다.");
+		
+		//JOptionPane.showMessageDialog(null, "게임을 시작합니다.");
 		//JOptionPane.showMessageDialog(null, "플레이어0의 턴입니다.");
 	}
 	
@@ -81,12 +82,12 @@ public class DavinchiCodeHelper {
 		this.turnindex = Turn.CARDGET;//턴의 단계 : 카드 가져오기 단계
 		this.canpass = true;//카드 맞추기를 했음으로 통과 가능
 		if(!pAL.get(playerindex).cardposition(cardpos, color, number)){//틀렸다면
-			JOptionPane.showMessageDialog(null, "틀렸습니다. 턴이 넘어갑니다.");
-			JOptionPane.showMessageDialog(null, "마지막으로 뽑은 카드가 공개됩니다.");
+			//JOptionPane.showMessageDialog(null, "틀렸습니다. 턴이 넘어갑니다.");
+			//JOptionPane.showMessageDialog(null, "마지막으로 뽑은 카드가 공개됩니다.");
 			pAL.get(this.turn%this.number_of_gamer).lastopen();//마지막으로 가져온 카드 오픈
 			nextturn();//턴이 넘어감
 		} else {//맞추었다면
-			JOptionPane.showMessageDialog(null, "맞추었습니다. 턴을 넘기거나 카드를 뽑을 수 있습니다.");
+			//JOptionPane.showMessageDialog(null, "맞추었습니다. 턴을 넘기거나 카드를 뽑을 수 있습니다.");
 			pAL.get(playerindex).setlive();//맞춤당한사람이 살았는지 검사
 			this.assertEnd();//게임이 끝났는지 검사
 			}
@@ -136,7 +137,7 @@ public class DavinchiCodeHelper {
 		
 		this.canpass = false;//턴시작이므로 패스불가
 		
-		JOptionPane.showMessageDialog(null, "플레이어"+ (this.turn % this.number_of_gamer + 1)+ "의 턴입니다.");
+		//JOptionPane.showMessageDialog(null, "플레이어"+ (this.turn % this.number_of_gamer + 1)+ "의 턴입니다.");
 	}
 	
 	private void assertEnd(){//게임끝 검사 메소드
@@ -145,7 +146,7 @@ public class DavinchiCodeHelper {
 			if (DCP.Islive()) liver++;
 		}
 		if (liver == 1) {//생존자가 1명이라면
-			JOptionPane.showMessageDialog(null, "플레이어"+ (this.turn % this.number_of_gamer + 1) +"께서 승리하셨습니다.");
+			//JOptionPane.showMessageDialog(null, "플레이어"+ (this.turn % this.number_of_gamer + 1) +"께서 승리하셨습니다.");
 		}
 	}
 	
