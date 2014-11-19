@@ -24,11 +24,13 @@ public class DavinchiCodeHelper {
 	private int turn;// 턴 세기 [제 1 턴 = 0]
 	private Turn turnindex;// 한 턴 안의 단계
 	private boolean canpass;// 패스가능여부
+	private int mode;
 
-	public DavinchiCodeHelper(GameHandler gh, int gamer) { // 생성자
+	public DavinchiCodeHelper(GameHandler gh, int gamer, int mode) { // 생성자
 
 		this.gamehandler = gh; // ui연결
 		this.number_of_gamer = gamer;// 게임자 수 설정
+		this.mode = mode; // 0 - 오지석룰 1 - 최주영룰
 		Arrays.fill(deck_white, true);
 		Arrays.fill(deck_black, true);// 덱 초기화
 		for (int i = 0; i < number_of_gamer; i++) {// 플레이어 객체 생성
@@ -93,6 +95,9 @@ public class DavinchiCodeHelper {
 			this.turnindex = Turn.CARDGET;// 턴의 단계 : 카드 가져오기 단계
 		} else {
 			this.turnindex = Turn.SELECT;// 남은 카드가 없으면 셀렉트단계
+		}
+		if (this.mode == 1){
+			this.turnindex = Turn.SELECT;
 		}
 		this.canpass = true;// 카드 맞추기를 했음으로 통과 가능
 		if (!pAL.get(playerindex).cardposition(cardpos, color, number)) {// 틀렸다면
