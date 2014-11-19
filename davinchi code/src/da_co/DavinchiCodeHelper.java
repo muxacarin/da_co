@@ -96,9 +96,7 @@ public class DavinchiCodeHelper {
 		} else {
 			this.turnindex = Turn.SELECT;// 남은 카드가 없으면 셀렉트단계
 		}
-		if (this.mode == 1){
-			this.turnindex = Turn.SELECT;
-		}
+
 		this.canpass = true;// 카드 맞추기를 했음으로 통과 가능
 		if (!pAL.get(playerindex).cardposition(cardpos, color, number)) {// 틀렸다면
 			// JOptionPane.showMessageDialog(null, "틀렸습니다. 턴이 넘어갑니다.");
@@ -109,6 +107,7 @@ public class DavinchiCodeHelper {
 		} else {// 맞추었다면
 			// JOptionPane.showMessageDialog(null,
 			// "맞추었습니다. 턴을 넘기거나 카드를 뽑을 수 있습니다.");
+			if(this.mode == 1) this.turnindex = Turn.SELECT;
 			pAL.get(playerindex).setlive();// 맞춤당한사람이 살았는지 검사
 			if (!pAL.get(playerindex).Islive()) {
 				gamehandler.dead(playerindex);
