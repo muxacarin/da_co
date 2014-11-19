@@ -124,6 +124,9 @@ public class DavinchiCodeHelper {
 
 	public void passturn() {// 턴 넘기기 메소드
 		this.nextturn();// 다음턴으로 넘김
+		if(this.mode == 1){
+			if (this.remainder_black != 0 || this.remainder_white != 0) this.turnindex = Turn.CARDGET;
+		}
 		gamehandler.update();// ui 업데이트
 	}
 
