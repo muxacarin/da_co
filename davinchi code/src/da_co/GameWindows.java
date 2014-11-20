@@ -156,7 +156,11 @@ public class GameWindows extends JFrame implements GameHandler {
 	 **/
 	public GameWindows(int people) {
 
-		davinchicodehelper = new DavinchiCodeHelper(this, people,Damode.MDV);// 게임헬퍼 생성후 연결 - 오지석룰
+		davinchicodehelper = new DavinchiCodeHelper(this, people, Damode.MDV);// 게임헬퍼
+																				// 생성후
+																				// 연결
+																				// -
+																				// 오지석룰
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 기본설정 시작
 		setBounds(50, 50, 880, 700);
@@ -923,7 +927,7 @@ public class GameWindows extends JFrame implements GameHandler {
 	@Override
 	public void dead(int playerindex) {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, "플레이어" + playerindex + 1
+		JOptionPane.showMessageDialog(null, "플레이어" + (playerindex + 1)
 				+ "이 탈락했습니다.");
 
 	}
@@ -931,8 +935,9 @@ public class GameWindows extends JFrame implements GameHandler {
 	@Override
 	public void gameEnd(int winnerindex) {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, "플레이어" + winnerindex + 1
+		JOptionPane.showMessageDialog(null, "플레이어" + (winnerindex + 1)
 				+ "이 승리했습니다.");
+		System.exit(0);
 
 	}
 }
