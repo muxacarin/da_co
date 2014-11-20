@@ -156,7 +156,7 @@ public class GameWindows extends JFrame implements GameHandler {
 	 **/
 	public GameWindows(int people) {
 
-		davinchicodehelper = new DavinchiCodeHelper(this, people,0);// 게임헬퍼 생성후 연결 - 오지석룰
+		davinchicodehelper = new DavinchiCodeHelper(this, people,Damode.MDV);// 게임헬퍼 생성후 연결 - 오지석룰
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 기본설정 시작
 		setBounds(50, 50, 880, 700);

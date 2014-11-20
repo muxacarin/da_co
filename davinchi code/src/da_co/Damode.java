@@ -2,6 +2,6 @@ package da_co;
 
 public enum Damode {
 	
-	ChocoTea, MDV
+	MDV, ChocoTea
 
 }

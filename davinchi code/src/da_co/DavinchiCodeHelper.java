@@ -26,16 +26,12 @@ public class DavinchiCodeHelper {
 	private boolean canpass;// 패스가능여부
 	private Damode mode;
 
-	public DavinchiCodeHelper(GameHandler gh, int gamer, int mode) { // 생성자
+	public DavinchiCodeHelper(GameHandler gh, int gamer, Damode mode) { // 생성자
 
 		this.gamehandler = gh; // ui연결
 		this.number_of_gamer = gamer;// 게임자 수 설정
 
-		if (mode == 0)
-			this.mode = Damode.MDV;
-		else if (mode == 1)
-			this.mode = Damode.ChocoTea;
-
+		this.mode = mode;
 		Arrays.fill(deck_white, true);
 		Arrays.fill(deck_black, true);// 덱 초기화
 		for (int i = 0; i < number_of_gamer; i++) {// 플레이어 객체 생성
