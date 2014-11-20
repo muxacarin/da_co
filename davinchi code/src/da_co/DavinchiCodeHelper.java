@@ -24,13 +24,18 @@ public class DavinchiCodeHelper {
 	private int turn;// 턴 세기 [제 1 턴 = 0]
 	private Turn turnindex;// 한 턴 안의 단계
 	private boolean canpass;// 패스가능여부
-	private int mode;
+	private Damode mode;
 
 	public DavinchiCodeHelper(GameHandler gh, int gamer, int mode) { // 생성자
 
 		this.gamehandler = gh; // ui연결
 		this.number_of_gamer = gamer;// 게임자 수 설정
-		this.mode = mode; // 0 - 오지석룰 1 - 최주영룰
+
+		if (mode == 0)
+			this.mode = Damode.MDV;
+		else if (mode == 1)
+			this.mode = Damode.ChocoTea;
+
 		Arrays.fill(deck_white, true);
 		Arrays.fill(deck_black, true);// 덱 초기화
 		for (int i = 0; i < number_of_gamer; i++) {// 플레이어 객체 생성
@@ -107,7 +112,8 @@ public class DavinchiCodeHelper {
 		} else {// 맞추었다면
 			// JOptionPane.showMessageDialog(null,
 			// "맞추었습니다. 턴을 넘기거나 카드를 뽑을 수 있습니다.");
-			if(this.mode == 1) this.turnindex = Turn.SELECT;
+			if (this.mode == Damode.ChocoTea)
+				this.turnindex = Turn.SELECT;
 			pAL.get(playerindex).setlive();// 맞춤당한사람이 살았는지 검사
 			if (!pAL.get(playerindex).Islive()) {
 				gamehandler.dead(playerindex);
@@ -124,8 +130,9 @@ public class DavinchiCodeHelper {
 
 	public void passturn() {// 턴 넘기기 메소드
 		this.nextturn();// 다음턴으로 넘김
-		if(this.mode == 1){
-			if (this.remainder_black != 0 || this.remainder_white != 0) this.turnindex = Turn.CARDGET;
+		if (this.mode == Damode.ChocoTea) {
+			if (this.remainder_black != 0 || this.remainder_white != 0)
+				this.turnindex = Turn.CARDGET;
 		}
 		gamehandler.update();// ui 업데이트
 	}
