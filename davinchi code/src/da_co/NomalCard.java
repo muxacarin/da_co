@@ -8,23 +8,22 @@ package da_co;
  *
  */
 public class NomalCard implements Card {
-	
+
 	private final Dacolor color;
 	private final int number;
-	
+
 	private boolean open;
-	
-	public NomalCard(Dacolor co, int num){
+
+	public NomalCard(Dacolor co, int num) {
 		this.color = co;
 		this.number = num;
 		setOpen(false);
-		
-		
-		
+
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see da_co.Card#getColor()
 	 */
 	@Override
@@ -32,8 +31,9 @@ public class NomalCard implements Card {
 		return color;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see da_co.Card#getNumber()
 	 */
 	@Override
@@ -41,9 +41,9 @@ public class NomalCard implements Card {
 		return number;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see da_co.Card#isOpen()
 	 */
 	@Override
@@ -51,8 +51,9 @@ public class NomalCard implements Card {
 		return open;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see da_co.Card#setOpen(boolean)
 	 */
 	@Override
@@ -60,32 +61,35 @@ public class NomalCard implements Card {
 		this.open = open;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see da_co.Card#compareTo(da_co.Card)
 	 */
 	@Override
 	public int compareTo(Card arg0) {
 		// TODO Auto-generated method stub
-		if(this.getNumber() > arg0.getNumber()) return 1;
-		else if (this.getNumber() < arg0.getNumber()) return -1;
+		if (this.getNumber() > arg0.getNumber())
+			return 1;
+		else if (this.getNumber() < arg0.getNumber())
+			return -1;
 		else {
-			if (this.getColor().equals(arg0.getColor())) return 0;
-			else if (this.getColor().equals(Dacolor.BLACK)) return -1;
-			else return 1;
-		} 
-		
+			return this.getColor().ordinal() - arg0.getColor().ordinal();
+		}
+
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see da_co.Card#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj.getClass() == this.getClass()){
+		if (obj.getClass() == this.getClass()) {
 			Card compare = (Card) obj;
-			if (this.getColor().equals(compare.getColor()) && this.getNumber() == compare.getNumber()){
+			if (this.getColor().equals(compare.getColor())
+					&& this.getNumber() == compare.getNumber()) {
 				return true;
 			} else {
 				return false;
@@ -94,6 +98,5 @@ public class NomalCard implements Card {
 		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
-	
 
 }

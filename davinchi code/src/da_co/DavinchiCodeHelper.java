@@ -15,8 +15,8 @@ public class DavinchiCodeHelper {
 																						// 지정용
 																						// 어레이리스트
 	private final int number_of_gamer;// 게임하는 사람 수
-	private ArrayList<NomalCard> d_w = new ArrayList<NomalCard>();
-	private ArrayList<NomalCard> d_b = new ArrayList<NomalCard>();
+	private ArrayList<NomalCard> Deck_white = new ArrayList<NomalCard>();
+	private ArrayList<NomalCard> Deck_black = new ArrayList<NomalCard>();
 	private Random ran = new Random();// 난수 발생 객체
 	private int turn;// 턴 세기 [제 1 턴 = 0]
 	private Turn turnindex;// 한 턴 안의 단계
@@ -35,11 +35,11 @@ public class DavinchiCodeHelper {
 		this.turn = 0;// 턴 초기화
 
 		for (int i = 0; i <= 11; i++) {//덱 초기화
-			d_w.add(new NomalCard(Dacolor.WHITE, i));
-			d_b.add(new NomalCard(Dacolor.BLACK, i));
+			Deck_white.add(new NomalCard(Dacolor.WHITE, i));
+			Deck_black.add(new NomalCard(Dacolor.BLACK, i));
 		}
-		Collections.shuffle(d_b, ran);
-		Collections.shuffle(d_w, ran);
+		Collections.shuffle(Deck_black, ran);
+		Collections.shuffle(Deck_white, ran);
 
 	}
 
@@ -87,7 +87,7 @@ public class DavinchiCodeHelper {
 																		// 주인의
 																		// 인덱스
 																		// 설정
-		if (this.d_b.size() != 0 || this.d_w.size() != 0) {
+		if (this.Deck_black.size() != 0 || this.Deck_white.size() != 0) {
 			this.turnindex = Turn.CARDGET;// 턴의 단계 : 카드 가져오기 단계
 		} else {
 			this.turnindex = Turn.SELECT;// 남은 카드가 없으면 셀렉트단계
@@ -117,7 +117,7 @@ public class DavinchiCodeHelper {
 	public void passturn() {// 턴 넘기기 메소드
 		this.nextturn();// 다음턴으로 넘김
 		if (this.mode == Damode.ChocoTea) {//공식모드라면
-			if (this.d_b.size() != 0 || this.d_w.size() != 0) //패가 남아있다면
+			if (this.Deck_black.size() != 0 || this.Deck_white.size() != 0) //패가 남아있다면
 				this.turnindex = Turn.CARDGET;//단계 변경
 		}
 		gamehandler.update();// ui 업데이트
@@ -129,17 +129,17 @@ public class DavinchiCodeHelper {
 
 		switch (color) {// 색깔에 따라서
 		case BLACK:// 검정이라면
-			cardnumber = ran.nextInt(d_b.size());
-			this.pAL.get(playerindex).cardset(this.d_b.get(cardnumber));
-			this.d_b.remove(cardnumber);
-			Collections.shuffle(d_b, ran);
+			cardnumber = ran.nextInt(Deck_black.size());
+			this.pAL.get(playerindex).cardset(this.Deck_black.get(cardnumber));
+			this.Deck_black.remove(cardnumber);
+			Collections.shuffle(Deck_black, ran);
 
 			break;
 		case WHITE:// 하양이라면
-			cardnumber = ran.nextInt(d_w.size());
-			this.pAL.get(playerindex).cardset(this.d_w.get(cardnumber));
-			this.d_w.remove(cardnumber);
-			Collections.shuffle(d_w,ran);
+			cardnumber = ran.nextInt(Deck_white.size());
+			this.pAL.get(playerindex).cardset(this.Deck_white.get(cardnumber));
+			this.Deck_white.remove(cardnumber);
+			Collections.shuffle(Deck_white,ran);
 
 			break;
 		default:
@@ -202,11 +202,11 @@ public class DavinchiCodeHelper {
 	}
 
 	public int getRemainder_white() {
-		return d_w.size();
+		return Deck_white.size();
 	}
 
 	public int getRemainder_black() {
-		return d_b.size();
+		return Deck_black.size();
 	}
 
 }
