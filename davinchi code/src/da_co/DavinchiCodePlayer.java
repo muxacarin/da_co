@@ -13,7 +13,7 @@ public class DavinchiCodePlayer {
 	private boolean islive = true;// 생존 여부
 	private Card last;
 
-	public void cardset(Card arg0) {
+	public void cardset(NomalCard arg0) {
 		this.hand.add(arg0);
 		this.last = arg0;
 		Collections.sort(this.hand);
@@ -31,7 +31,7 @@ public class DavinchiCodePlayer {
 	public boolean cardget(Dacolor color, int number) {// 카드 들고있는지 검사 메소드
 
 		for (Card car : this.hand) {
-			if (car.equals(new Card(color, number)))
+			if (car.equals(new NomalCard(color, number)))
 				return true;
 		}
 		return false;
@@ -40,7 +40,7 @@ public class DavinchiCodePlayer {
 	public boolean opencardget(Dacolor color, int number) {// 카드가 오픈되어있는지 검사 메소드
 
 		for (Card car : this.hand) {
-			if (car.equals(new Card(color, number)))
+			if (car.equals(new NomalCard(color, number)))
 				return car.isOpen();
 		}
 		return false;
@@ -51,7 +51,7 @@ public class DavinchiCodePlayer {
 																			// 위치로
 																			// 검사
 																			// 메소드
-		if (this.hand.get(cardpos).equals(new Card(color, number))) {
+		if (this.hand.get(cardpos).equals(new NomalCard(color, number))) {
 			this.hand.get(cardpos).setOpen(true);
 			return true;
 		} else
