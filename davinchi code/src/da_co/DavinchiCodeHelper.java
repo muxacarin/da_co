@@ -133,19 +133,17 @@ public class DavinchiCodeHelper {
 			this.pAL.get(playerindex).cardset(this.Deck_black.get(cardnumber));
 			this.Deck_black.remove(cardnumber);
 			Collections.shuffle(Deck_black, ran);
-
 			break;
 		case WHITE:// 하양이라면
 			cardnumber = ran.nextInt(Deck_white.size());
 			this.pAL.get(playerindex).cardset(this.Deck_white.get(cardnumber));
 			this.Deck_white.remove(cardnumber);
 			Collections.shuffle(Deck_white,ran);
-
 			break;
 		default:
 			break;
 
-		}// 카드를 주지 못했다면 실패햇다고 반환
+		}
 	}
 
 	private void nextturn() {// 턴 넘기기 구현
