@@ -145,7 +145,7 @@ public class GameWindows extends JFrame implements GameHandler {
 	private JButton passbutton;// 턴 넘기기
 
 	private JButton exitbutton;// 게임 종료
-	private JComboBox numberBox;// 숫자 결정
+	private JComboBox<String> numberBox;// 숫자 결정
 
 	/**
 	 * Launch the application.
@@ -329,9 +329,9 @@ public class GameWindows extends JFrame implements GameHandler {
 		gbc_p3card_3.gridy = 4;
 		contentPane.add(p3card_3, gbc_p3card_3);
 
-		numberBox = new JComboBox(); // 숫자선언박스 정의 시작
+		numberBox = new JComboBox<String>(); // 숫자선언박스 정의 시작
 		numberBox.setFont(new Font("Dialog", Font.BOLD, 20));
-		numberBox.setModel(new DefaultComboBoxModel(new String[] { "    0",
+		numberBox.setModel(new DefaultComboBoxModel<String>(new String[] { "    0",
 				"    1", "    2", "    3", "    4", "    5", "    6", "    7",
 				"    8", "    9", "   10", "   11" }));
 		GridBagConstraints gbc_numberBox = new GridBagConstraints();
@@ -926,7 +926,6 @@ public class GameWindows extends JFrame implements GameHandler {
 
 	@Override
 	public void dead(int playerindex) {
-		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(null, "플레이어" + (playerindex + 1)
 				+ "이 탈락했습니다.");
 
@@ -934,7 +933,6 @@ public class GameWindows extends JFrame implements GameHandler {
 
 	@Override
 	public void gameEnd(int winnerindex) {
-		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(null, "플레이어" + (winnerindex + 1)
 				+ "이 승리했습니다.");
 		System.exit(0);

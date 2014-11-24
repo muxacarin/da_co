@@ -100,6 +100,7 @@ public class DavinchiCodeHelper {
 			pAL.get(this.turn % this.number_of_gamer).lastopen();// 마지막으로 가져온 카드
 																	// 오픈
 			nextturn();// 턴이 넘어감
+			this.gamehandler.update();
 		} else {// 맞추었다면
 			// JOptionPane.showMessageDialog(null,
 			// "맞추었습니다. 턴을 넘기거나 카드를 뽑을 수 있습니다.");
@@ -107,11 +108,13 @@ public class DavinchiCodeHelper {
 				this.turnindex = Turn.SELECT;//안뽑고 셀렉트해야함
 			pAL.get(playerindex).setlive();// 맞춤당한사람이 살았는지 검사
 			if (!pAL.get(playerindex).Islive()) {//타겟이 죽었으면
+				this.gamehandler.update();
 				gamehandler.dead(playerindex);//죽음 알림
-				this.isEnd();//게임 종료 검사
+				if(this.isEnd()) return;//게임 종료 검사
+			} else {
+				this.gamehandler.update();
 			}
 		}
-		this.gamehandler.update();// ui 업데이트
 	}
 
 	public void passturn() {// 턴 넘기기 메소드
@@ -159,7 +162,7 @@ public class DavinchiCodeHelper {
 		// this.number_of_gamer + 1)+ "의 턴입니다.");
 	}
 
-	private void isEnd() {// 게임끝 검사 메소드
+	private boolean isEnd() {// 게임끝 검사 메소드
 		int liver = 0;// 생존자수
 		for (DavinchiCodePlayer DCP : this.pAL) {// 생존자 수 세기
 			if (DCP.Islive())
@@ -170,9 +173,12 @@ public class DavinchiCodeHelper {
 			// this.number_of_gamer + 1) +"께서 승리하셨습니다.");
 			this.gamehandler.update();
 			for (int i = 0; i < this.getNumberOfGamer(); i++)
-				if (this.pAL.get(i).Islive())
+				if (this.pAL.get(i).Islive()){
 					this.gamehandler.gameEnd(i);
+					return true;
+				}
 		}
+		return false;
 	}
 
 	public int getTurn() {

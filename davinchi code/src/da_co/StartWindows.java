@@ -26,7 +26,7 @@ public class StartWindows {
 	private JFrame frame;
 	private GameWindows gamewindows;
 	private final Action gamestart = new GameStart();
-	private JComboBox gamepeople;
+	private JComboBox<String> gamepeople;
 	private JLabel label_1;
 
 	/**
@@ -88,9 +88,9 @@ public class StartWindows {
 		gbc_label_1.gridy = 1;
 		frame.getContentPane().add(label_1, gbc_label_1);
 
-		gamepeople = new JComboBox();
+		gamepeople = new JComboBox<String>();
 		gamepeople.setFont(new Font("Dialog", Font.BOLD, 60));
-		gamepeople.setModel(new DefaultComboBoxModel(new String[] {
+		gamepeople.setModel(new DefaultComboBoxModel<String>(new String[] {
 				"         2", "         3", "         4" }));
 		gamepeople.setSelectedIndex(2);
 		GridBagConstraints gbc_gamepeople = new GridBagConstraints();
