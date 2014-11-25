@@ -1,12 +1,5 @@
-/**
- * 
- */
 package da_co;
 
-/**
- * @author muxacarin
- *
- */
 public class NomalCard implements Card {
 
 	private final Dacolor color;
@@ -18,54 +11,32 @@ public class NomalCard implements Card {
 		this.color = co;
 		this.number = num;
 		setOpen(false);
-
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see da_co.Card#getColor()
-	 */
+
 	@Override
 	public Dacolor getColor() {
 		return color;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see da_co.Card#getNumber()
-	 */
+
 	@Override
 	public int getNumber() {
 		return number;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see da_co.Card#isOpen()
-	 */
+
 	@Override
 	public boolean isOpen() {
 		return open;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see da_co.Card#setOpen(boolean)
-	 */
+
 	@Override
 	public void setOpen(boolean open) {
 		this.open = open;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see da_co.Card#compareTo(da_co.Card)
-	 */
 	@Override
 	public int compareTo(Card arg0) {
 		// TODO Auto-generated method stub
@@ -76,14 +47,8 @@ public class NomalCard implements Card {
 		else {
 			return this.getColor().ordinal() - arg0.getColor().ordinal();
 		}
-
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see da_co.Card#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj.getClass() == this.getClass()) {
@@ -95,8 +60,6 @@ public class NomalCard implements Card {
 				return false;
 			}
 		}
-		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
-
 }
