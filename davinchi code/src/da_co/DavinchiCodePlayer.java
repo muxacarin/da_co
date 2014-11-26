@@ -44,7 +44,6 @@ public class DavinchiCodePlayer {
 				return car.isOpen();
 		}
 		return false;
-
 	}
 
 	public boolean assertbyposition(int cardpos, Dacolor color, int number) {// 카드
@@ -56,7 +55,6 @@ public class DavinchiCodePlayer {
 			return true;
 		} else
 			return false;
-
 	}
 
 	public boolean Islive() {// 생존여부 반환
