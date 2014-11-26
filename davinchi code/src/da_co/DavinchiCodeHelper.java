@@ -75,7 +75,8 @@ public class DavinchiCodeHelper {
 	public void takecard(int peopleindex, Dacolor color) {// 카드 가져오기 메소드
 
 		this.addcard(peopleindex % this.number_of_gamer, color);// 카드를 얻어온다
-		this.turnindex = Turn.SELECT;// 턴의 단계 : 카드 맞추기
+		this.turnindex = Turn.SELECT;// 턴의 단계 : 카드 맞추기s
+		if(this.mode == Damode.MDV) this.canpass = false;
 		this.gamehandler.update();// ui 업데이트
 
 	}
