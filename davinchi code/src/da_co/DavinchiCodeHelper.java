@@ -126,6 +126,10 @@ public class DavinchiCodeHelper {
 		}
 		gamehandler.update();// ui 업데이트
 	}
+	
+	public int lastcardpos(int playerindex){
+		return pAL.get(playerindex).lastcardpos();
+	}
 
 	private void addcard(int playerindex, Dacolor color) {// 카드 가져오기 구현
 

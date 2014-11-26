@@ -69,4 +69,11 @@ public class DavinchiCodePlayer {
 		}
 		this.islive = false;
 	}
+
+	public int lastcardpos() {
+		for(int i = 0; i < hand.size(); i++){
+			if(last.equals(hand.get(i))) return i;
+		}
+		return -1;
+	}
 }
