@@ -8,8 +8,8 @@ public class Hand implements Iterable<Card>  {
 	
 	private ArrayList<Card> handlist = new ArrayList<Card>();
 	
-	public void add(NomalCard arg0){
-		this.handlist.add(arg0);
+	public void add(Card card){
+		this.handlist.add(card);
 		Collections.sort(this.handlist);
 	}
 	
