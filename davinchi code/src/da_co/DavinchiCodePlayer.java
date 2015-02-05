@@ -9,14 +9,13 @@ import java.util.Collections;
  */
 public class DavinchiCodePlayer {
 
-	private ArrayList<Card> hand = new ArrayList<Card>();
+	private Hand hand = new Hand();
 	private boolean islive = true;// 생존 여부
 	private Card last;
 
 	public void cardset(NomalCard arg0) {
 		this.hand.add(arg0);
 		this.last = arg0;
-		Collections.sort(this.hand);
 	}
 
 	public void lastopen() {// 마지막 득템 카드 오픈 메소드
