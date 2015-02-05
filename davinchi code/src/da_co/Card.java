@@ -2,7 +2,6 @@ package da_co;
 
 public interface Card extends Comparable<Card>{
 	
-	static final int JOKER = 79;
 
 	/**
 	 * @return the color
