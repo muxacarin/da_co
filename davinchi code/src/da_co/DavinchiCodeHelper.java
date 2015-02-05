@@ -15,8 +15,8 @@ public class DavinchiCodeHelper {
 																						// 지정용
 																						// 어레이리스트
 	private final int number_of_gamer;// 게임하는 사람 수
-	private ArrayList<Card> Deck_white = new ArrayList<Card>();
-	private ArrayList<Card> Deck_black = new ArrayList<Card>();
+	private ArrayList<NomalCard> Deck_white = new ArrayList<NomalCard>();
+	private ArrayList<NomalCard> Deck_black = new ArrayList<NomalCard>();
 	private Random ran = new Random();// 난수 발생 객체
 	private int turn;// 턴 세기 [제 1 턴 = 0]
 	private Turn turnindex;// 한 턴 안의 단계
@@ -38,8 +38,6 @@ public class DavinchiCodeHelper {
 			Deck_white.add(new NomalCard(Dacolor.WHITE, i));
 			Deck_black.add(new NomalCard(Dacolor.BLACK, i));
 		}
-		Deck_white.add(new JokerCard(Dacolor.WHITE));
-		Deck_black.add(new JokerCard(Dacolor.BLACK));
 		Collections.shuffle(Deck_black, ran);
 		Collections.shuffle(Deck_white, ran);
 
