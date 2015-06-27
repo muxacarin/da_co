@@ -57,8 +57,10 @@ public class JokerCard implements Card {
 
 	@Override
 	public int compareTo(Card arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (arg0.equals(this)) return 0;
+		if(this.beforecard.compareTo(arg0) >= 0) return 1;
+		else if (this.aftercard.compareTo(arg0)<=0) return -1;
+		else return 0;
 	}
 
 }

@@ -10,9 +10,9 @@ public class DavinchiCodePlayer {
 	private boolean islive = true;// 생존 여부
 	private Card last;
 
-	public void cardset(NomalCard arg0) {
-		this.hand.add(arg0);
-		this.last = arg0;
+	public void cardset(Card card) {
+		this.hand.add(card);
+		this.last = card;
 	}
 
 	public void lastopen() {// 마지막 득템 카드 오픈 메소드
