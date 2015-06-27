@@ -1,4 +1,4 @@
-package da_co;
+package kr.ac.uos.muxacarin14.davinchicode;
 
 public class NomalCard implements Card {
 
